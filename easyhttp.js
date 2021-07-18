@@ -45,3 +45,17 @@ easyHTTP.prototype.put = function (url, data, callback) {
 };
 
 // Make an HTTP DELETE Request
+easyHTTP.prototype.delete = function (url, callback) {
+	this.http.open('DELETE', url, true);
+
+	let that = this;
+	this.http.onload = function () {
+		if (that.http.status === 200) {
+			callback(null, 'Post Deleted');
+		} else {
+			callback(`Error: ${that.http.status}`);
+		}
+	};
+
+	this.http.send();
+};
