@@ -32,4 +32,16 @@ easyHTTP.prototype.post = function (url, data, callback) {
 };
 
 // Make an HTTP PUT Request
+easyHTTP.prototype.put = function (url, data, callback) {
+	this.http.open('PUT', url, true);
+	this.http.setRequestHeader('Content-type', 'application/json');
+
+	let that = this;
+	this.http.onload = function () {
+		callback(null, that.http.responseText);
+	};
+
+	this.http.send(JSON.stringify(data));
+};
+
 // Make an HTTP DELETE Request
